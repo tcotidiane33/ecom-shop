@@ -24,7 +24,60 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+    <style>
+        .sdk {
+            display: block;
+            position: absolute;
+            background-position: center;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script>
+        function checkout() {
+            CinetPay.setConfig({
+                "apikey": "447088687629111c58c3573.70152188",
+                "site_id": "911501",
+                notify_url: 'https://matts.netlify.app/',
+                mode: 'PRODUCTION'
+            });
+            CinetPay.getCheckout({
+                transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+                amount: 100,
+                currency: 'XOF',
+                channels: 'ALL',
+                description: 'Test de paiement',   
+                 //Fournir ces variables pour le paiements par carte bancaire
+                customer_name:"ENGLISH",//Le nom du client
+                customer_surname:"EKAN",//Le prenom du client
+                customer_email: "support@kondronetworks.com",//l'email du client
+                customer_phone_number: "0769469844",//l'email du client
+                customer_address : "BP ABIDJAN ",//addresse du client
+                customer_city: "Abidjan",// La ville du client
+                customer_country : "CM",// le code ISO du pays
+                customer_state : "CM",// le code ISO l'état
+                customer_zip_code : "06510", // code postal
 
+            });
+            CinetPay.waitResponse(function(data) {
+                if (data.status == "REFUSED") {
+                    if (alert("Votre paiement a échoué")) {
+                        window.location.reload();
+                    }
+                } else if (data.status == "ACCEPTED") {
+                    if (alert("Votre paiement a été effectué avec succès")) {
+                        window.location.reload();
+                    }
+                }
+            });
+            CinetPay.onError(function(data) {
+                console.log(data);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -63,10 +116,10 @@
             </p>
 
           </div>
-
+          
           <input type="email" name="email" class="email-field" placeholder="Email Address" required>
 
-          <button type="submit" class="btn-newsletter">Subscribe</button>
+          <button type="submit"  class="btn-newsletter">Subscribe</button>
 
         </form>
 
@@ -196,7 +249,7 @@
 
           <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
 
-          <button class="search-btn">
+          <button onclick="checkout()" class="search-btn">
             <ion-icon name="search-outline"></ion-icon>
           </button>
 
@@ -204,16 +257,16 @@
 
         <div class="header-user-actions">
 
-          <button class="action-btn">
+          <button onclick="checkout()" class="action-btn">
             <ion-icon name="person-outline"></ion-icon>
           </button>
 
-          <button class="action-btn">
+          <button onclick="checkout()" class="action-btn">
             <ion-icon name="heart-outline"></ion-icon>
             <span class="count">0</span>
           </button>
 
-          <button class="action-btn">
+          <button onclick="checkout()" class="action-btn">
             <ion-icon name="bag-handle-outline"></ion-icon>
             <span class="count">0</span>
           </button>
@@ -495,23 +548,23 @@
         <ion-icon name="menu-outline"></ion-icon>
       </button>
 
-      <button class="action-btn">
+      <button onclick="checkout()" class="action-btn">
         <ion-icon name="bag-handle-outline"></ion-icon>
 
         <span class="count">0</span>
       </button>
 
-      <button class="action-btn">
+      <button onclick="checkout()" class="action-btn">
         <ion-icon name="home-outline"></ion-icon>
       </button>
 
-      <button class="action-btn">
+      <button  onclick="checkout()"class="action-btn">
         <ion-icon name="heart-outline"></ion-icon>
 
         <span class="count">0</span>
       </button>
 
-      <button class="action-btn" data-mobile-menu-open-btn>
+      <button onclick="checkout()" class="action-btn" data-mobile-menu-open-btn>
         <ion-icon name="grid-outline"></ion-icon>
       </button>
 
@@ -522,7 +575,7 @@
       <div class="menu-top">
         <h2 class="menu-title">Menu</h2>
 
-        <button class="menu-close-btn" data-mobile-menu-close-btn>
+        <button onclick="checkout()" class="menu-close-btn" data-mobile-menu-close-btn>
           <ion-icon name="close-outline"></ion-icon>
         </button>
       </div>
@@ -535,7 +588,7 @@
 
         <li class="menu-category">
 
-          <button class="accordion-menu" data-accordion-btn>
+          <button onclick="checkout()" class="accordion-menu" data-accordion-btn>
             <p class="menu-title">Men's</p>
 
             <div>
@@ -568,7 +621,7 @@
 
         <li class="menu-category">
 
-          <button class="accordion-menu" data-accordion-btn>
+          <button onclick="checkout()" class="accordion-menu" data-accordion-btn>
             <p class="menu-title">Women's</p>
 
             <div>
@@ -601,7 +654,7 @@
 
         <li class="menu-category">
 
-          <button class="accordion-menu" data-accordion-btn>
+          <button onclick="checkout()" class="accordion-menu" data-accordion-btn>
             <p class="menu-title">Jewelry</p>
 
             <div>
@@ -634,7 +687,7 @@
 
         <li class="menu-category">
 
-          <button class="accordion-menu" data-accordion-btn>
+          <button onclick="checkout()" class="accordion-menu" data-accordion-btn>
             <p class="menu-title">Perfume</p>
 
             <div>
@@ -795,6 +848,7 @@
               <a href="#" class="banner-btn">Shop now</a>
 
             </div>
+            
 
           </div>
 
@@ -1564,7 +1618,7 @@
                         <h4 class="showcase-title">Relaxed Short full Sleeve T-Shirt</h4>
                       </a>
 
-                      <a href="#" class="showcase-category">Clothes</a>
+                      <a href="#" onclick="checkout()" class="showcase-category">Clothes</a>
 
                       <div class="price-box">
                         <p class="price">$45.00</p>
@@ -1769,7 +1823,7 @@
             
                     <div class="showcase-content">
             
-                      <a href="#">
+                      <a href="#" onclick="checkout()">
                         <h4 class="showcase-title">Running & Trekking Shoes - White</h4>
                       </a>
             
@@ -2305,7 +2359,7 @@
                       <del>$2000.00</del>
                     </div>
               
-                    <button class="add-cart-btn">add to cart</button>
+                    <button onclick="checkout()" class="add-cart-btn">add to cart</button>
               
                     <div class="showcase-status">
                       <div class="wrapper">
@@ -2745,7 +2799,7 @@
                   <p class="showcase-badge angle black">sale</p>
               
                   <div class="showcase-actions">
-                    <button class="btn-action">
+                    <button onclick="checkout()" class="btn-action">
                       <ion-icon name="heart-outline"></ion-icon>
                     </button>
               
@@ -2808,7 +2862,7 @@
                       <ion-icon name="repeat-outline"></ion-icon>
                     </button>
               
-                    <button class="btn-action">
+                    <button onclick="checkout()" class="btn-action">
                       <ion-icon name="bag-add-outline"></ion-icon>
                     </button>
                   </div>
@@ -3583,7 +3637,51 @@
   <!--
     - custom js link
   -->
-  <script src="./assets/js/script.js"></script>
+      <script src="https://cdn.cinetpay.com/seamless/main.js">
+	  	function checkout() {
+            CinetPay.setConfig({
+                "apikey": "447088687629111c58c3573.70152188",
+                "site_id": "911501",
+                notify_url: 'https://matts.netlify.app/',
+                mode: 'PRODUCTION'
+            });
+            CinetPay.getCheckout({
+                transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+                amount: 100,
+                currency: 'XOF',
+                channels: 'ALL',
+                description: 'Test de paiement',   
+                 //Fournir ces variables pour le paiements par carte bancaire
+                customer_name:"Joe",//Le nom du client
+                customer_surname:"Down",//Le prenom du client
+                customer_email: "down@test.com",//l'email du client
+                customer_phone_number: "088767611",//l'email du client
+                customer_address : "BP 0024",//addresse du client
+                customer_city: "Antananarivo",// La ville du client
+                customer_country : "CM",// le code ISO du pays
+                customer_state : "CM",// le code ISO l'état
+                customer_zip_code : "06510", // code postal
+
+            });
+            CinetPay.waitResponse(function(data) {
+                if (data.status == "REFUSED") {
+                    if (alert("Votre paiement a échoué")) {
+                        window.location.reload();
+                    }
+                } else if (data.status == "ACCEPTED") {
+                    if (alert("Votre paiement a été effectué avec succès")) {
+                        window.location.reload();
+                    }
+                }
+            });
+            CinetPay.onError(function(data) {
+                console.log(data);
+            });
+        }
+	  </script>
+  <script src="./assets/js/script.js">
+  
+  </script>
 
   <!--
     - ionicon link
